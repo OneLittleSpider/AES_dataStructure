@@ -1,6 +1,8 @@
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.IvParameterSpec;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.Arrays;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
@@ -15,18 +17,23 @@ public class Main {
 
     }
 
+    public static IvParameterSpec ivGenerator(){
+        byte[] iv =new byte[16];
+        new SecureRandom().nextBytes(iv);
+        return new IvParameterSpec(iv);
+    }
 
-    public static void main(String[] args) {
-        // Press Opt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Testing field for the AES!");
-
-        // Press Ctrl+R or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Ctrl+D to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Cmd+F8.
-            System.out.println("i = " + i);
+    public static void addRoundKey(byte[] plainText, byte[] key){
+        for(int i=0;i< plainText.length;i++){
+            plainText[i]^=key[i];
         }
+    }
+//public static subBytes function
+//public static shiftRow function
+//public static MixColumn function
+    public static void main(String[] args) {
+
+
+
     }
 }
